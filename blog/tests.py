@@ -1,3 +1,7 @@
-from django.test import TestCase
+from django.test import LiveServerTestCase
 
-# Create your tests here.
+class CVPageTest(LiveServerTestCase):
+
+    def test_uses_CV_template(self):
+        response = self.client.get('/CV/')
+        self.assertTemplateUsed(response, 'blog/CV.html', 'blog/base.html')
