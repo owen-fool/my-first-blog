@@ -15,3 +15,18 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+#Included by mistake
+class CV(models.Model):
+    personal_info = models.TextField()
+    education = models.TextField()
+    work_experience = models.TextField()
+
+    def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.work_experience
+
+class CVItem(models.Model):
+    text = models.TextField(default='')
