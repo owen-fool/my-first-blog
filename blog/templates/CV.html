@@ -1,18 +1,30 @@
+{% load static %}
 <html>
   <head>
     <title>CV</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
   </head>
   <body>
-    <h1>CV</h1>
-    <table id="id_list_table">
-      {% for item in items %}
-      <tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr>
-      {% endfor %}
-    </table>
-    
-    <form method="POST">
-      <input name="item_text" id="id_new_item" placeholder="Enter a CV item" />
-      {% csrf_token %}
-    </form>
+    <div class="page-header">
+      <a href="{% url 'post_list' %}" class="top-menu"><span class="glyphicon glyphicon-home"></span></a>
+      <h1><a href="/CV/">CV</a></h1>
+    </div>
+    <div class="content container">
+      <table id="id_list_table">
+	{% for item in items %}
+	<tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr>
+	{% endfor %}
+      </table>
+      {% if user.is_authenticated %}
+      <form method="POST">
+	<input name="item_text" id="id_new_item" placeholder="Enter a CV item" />
+	
+	{% csrf_token %}
+      </form>
+      {% endif %}
+    </div>
   </body>
 </html>
